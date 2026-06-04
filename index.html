@@ -1,0 +1,882 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plataforma definitiva para Personal Trainers. Automatize agendamentos, gestão de alunos e aumente seu faturamento.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>FitPro Automação | Plataforma para Personal Trainers</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%AA%3C/text%3E%3C/svg%3E">
+
+    <style>
+        /* ============================================
+           FitPro - CSS Premium Fitness
+           ============================================ */
+        :root {
+            --color-bg: #0a0a0a;
+            --color-bg-alt: #111111;
+            --color-bg-elevated: #161616;
+            --color-bg-card: #1a1a1a;
+            --color-text: #ffffff;
+            --color-text-muted: #a0a0a0;
+            --color-text-subtle: #6b6b6b;
+            --color-border: #262626;
+            --color-border-light: #333333;
+            --color-accent: #C6FF00;
+            --color-accent-dark: #9FCC00;
+            --color-accent-glow: rgba(198, 255, 0, 0.4);
+            --color-orange: #FF6B35;
+            --color-orange-glow: rgba(255, 107, 53, 0.4);
+            --color-purple: #B026FF;
+            --color-blue: #00D4FF;
+            --color-whatsapp: #25D366;
+            --color-whatsapp-dark: #1ea952;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --container-max: 1280px;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.3);
+            --shadow-lg: 0 16px 48px rgba(0,0,0,0.4);
+            --shadow-glow: 0 0 60px var(--color-accent-glow);
+            --shadow-glow-orange: 0 0 60px var(--color-orange-glow);
+            --t-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --t-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --t-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --t-spring: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+        }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: inherit; text-decoration: none; transition: color var(--t-fast); }
+        button { border: none; background: none; cursor: pointer; font-family: inherit; color: inherit; }
+        ul { list-style: none; }
+
+        .container { max-width: var(--container-max); margin: 0 auto; padding: 0 24px; width: 100%; }
+        .section { padding: 120px 0; position: relative; }
+        .section__header { text-align: center; max-width: 800px; margin: 0 auto 80px; }
+        .section__eyebrow {
+            display: inline-block;
+            color: var(--color-accent);
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            padding: 8px 16px;
+            background: rgba(198, 255, 0, 0.08);
+            border: 1px solid rgba(198, 255, 0, 0.2);
+            border-radius: var(--radius-full);
+        }
+        .section__title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+        }
+        .section__description { color: var(--color-text-muted); font-size: 1.125rem; line-height: 1.7; max-width: 640px; margin: 0 auto; }
+        .text-gradient {
+            background: linear-gradient(135deg, var(--color-accent) 0%, #00FFB7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        .text-accent { color: var(--color-accent); position: relative; display: inline-block; }
+        .text-accent::after {
+            content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 8px;
+            background: var(--color-accent); opacity: 0.2; z-index: -1; border-radius: 4px;
+        }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 16px 32px;
+            font-family: var(--font-display); font-weight: 600; font-size: 1rem;
+            border-radius: var(--radius-full); cursor: pointer; transition: all var(--t-base);
+            text-align: center; position: relative; overflow: hidden;
+            white-space: nowrap; border: 2px solid transparent;
+        }
+        .btn__icon { width: 18px; height: 18px; transition: transform var(--t-base); }
+        .btn:hover .btn__icon { transform: translateX(4px); }
+        .btn--primary { background: var(--color-accent); color: #000; box-shadow: 0 8px 24px var(--color-accent-glow); }
+        .btn--primary:hover { background: var(--color-accent-dark); transform: translateY(-2px); box-shadow: 0 12px 32px var(--color-accent-glow); }
+        .btn--primary:active { transform: translateY(0); }
+        .btn--ghost { background: rgba(255, 255, 255, 0.05); color: var(--color-text); border: 1px solid var(--color-border); backdrop-filter: blur(10px); }
+        .btn--ghost:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--color-accent); }
+        .btn--ghost svg { width: 18px; height: 18px; }
+        .btn--featured { background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-orange) 100%); color: #000; box-shadow: var(--shadow-glow-orange); }
+        .btn--featured:hover { transform: translateY(-2px); box-shadow: 0 12px 32px var(--color-orange-glow); }
+        .btn--block { width: 100%; }
+        .btn--xl { padding: 20px 40px; font-size: 1.125rem; }
+
+        .header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 16px 0;
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid transparent;
+            transition: all var(--t-base);
+        }
+        .header.scrolled { background: rgba(10, 10, 10, 0.85); border-bottom-color: var(--color-border); padding: 12px 0; }
+        .nav { display: flex; align-items: center; justify-content: space-between; max-width: var(--container-max); margin: 0 auto; padding: 0 24px; }
+        .nav__logo { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--color-text); }
+        .logo-icon { font-size: 1.75rem; display: inline-block; transform: rotate(-10deg); filter: drop-shadow(0 0 12px var(--color-accent-glow)); }
+        .logo-accent { color: var(--color-accent); }
+        .nav__menu { display: flex; align-items: center; gap: 40px; }
+        .nav__link { color: var(--color-text-muted); font-weight: 500; font-size: 0.95rem; position: relative; transition: color var(--t-fast); }
+        .nav__link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--color-accent); transition: width var(--t-base); }
+        .nav__link:hover { color: var(--color-text); }
+        .nav__link:hover::after { width: 100%; }
+        .nav__cta { padding: 10px 20px; background: var(--color-accent); color: #000; font-weight: 600; font-size: 0.875rem; border-radius: var(--radius-full); transition: all var(--t-base); }
+        .nav__cta:hover { background: var(--color-accent-dark); transform: translateY(-1px); box-shadow: 0 8px 20px var(--color-accent-glow); }
+        .nav__toggle { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+        .nav__toggle span { display: block; width: 24px; height: 2px; background: var(--color-text); border-radius: 2px; transition: all var(--t-base); }
+
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; overflow: hidden; }
+        .hero__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+        .hero__gradient {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse at top right, rgba(198, 255, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at center, rgba(176, 38, 255, 0.05) 0%, transparent 70%);
+        }
+        .hero__particles {
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(2px 2px at 20% 30%, rgba(198, 255, 0, 0.4), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 107, 53, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(255, 255, 255, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 212, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 90% 60%, rgba(198, 255, 0, 0.3), transparent);
+            background-size: 200% 200%;
+            animation: particleFloat 20s ease-in-out infinite;
+            opacity: 0.6;
+        }
+        @keyframes particleFloat { 0%, 100% { background-position: 0% 0%; } 50% { background-position: 100% 100%; } }
+        .hero__container { position: relative; z-index: 2; display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
+        .hero__content { max-width: 700px; }
+        .hero__badge {
+            display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px;
+            background: rgba(198, 255, 0, 0.08); border: 1px solid rgba(198, 255, 0, 0.2);
+            border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 500;
+            color: var(--color-accent); margin-bottom: 32px; backdrop-filter: blur(10px);
+        }
+        .badge__dot { width: 8px; height: 8px; background: var(--color-accent); border-radius: 50%; animation: pulseDot 2s ease-in-out infinite; }
+        @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+        .hero__title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 24px; }
+        .hero__title-block { display: block; margin-top: 8px; }
+        .hero__subtitle { font-size: 1.25rem; line-height: 1.6; color: var(--color-text-muted); margin-bottom: 40px; max-width: 560px; }
+        .hero__subtitle strong { color: var(--color-text); font-weight: 600; }
+        .hero__cta-group { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 64px; }
+        .hero__stats { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+        .stat { display: flex; flex-direction: column; }
+        .stat__number { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--color-accent); line-height: 1; }
+        .stat__label { font-size: 0.875rem; color: var(--color-text-muted); margin-top: 4px; }
+        .stat__divider { width: 1px; height: 40px; background: var(--color-border); }
+        .hero__visual { position: relative; }
+        .hero__image-wrapper { position: relative; aspect-ratio: 4/5; border-radius: var(--radius-lg); overflow: hidden; transform: rotate(2deg); transition: transform var(--t-slow); }
+        .hero__image-wrapper:hover { transform: rotate(0deg) scale(1.02); }
+        .hero__image-glow {
+            position: absolute; inset: -20px;
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-orange) 100%);
+            opacity: 0.3; filter: blur(60px); z-index: -1;
+            animation: glowPulse 4s ease-in-out infinite;
+        }
+        @keyframes glowPulse { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.1); } }
+        .hero__image { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg); filter: contrast(1.1) saturate(1.1); }
+        .hero__floating-card {
+            position: absolute; display: flex; align-items: center; gap: 12px;
+            padding: 12px 20px;
+            background: rgba(20, 20, 20, 0.85);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--color-border); border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg); z-index: 3;
+            animation: floatCard 6s ease-in-out infinite;
+        }
+        .hero__card-1 { top: 30%; left: -40px; animation-delay: 0s; }
+        .hero__card-2 { bottom: 15%; right: -40px; animation-delay: 2s; }
+        @keyframes floatCard { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .card-icon { font-size: 1.5rem; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(198, 255, 0, 0.1); border-radius: var(--radius-sm); }
+        .card-title { font-weight: 700; font-size: 0.95rem; color: var(--color-text); line-height: 1.2; }
+        .card-sub { font-size: 0.75rem; color: var(--color-text-muted); margin-top: 2px; }
+        .hero__scroll-indicator { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 12px; color: var(--color-text-muted); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; z-index: 2; }
+        .scroll-mouse { width: 24px; height: 38px; border: 2px solid var(--color-text-muted); border-radius: 12px; position: relative; }
+        .scroll-wheel { width: 3px; height: 8px; background: var(--color-accent); border-radius: 2px; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); animation: scrollWheel 2s ease-in-out infinite; }
+        @keyframes scrollWheel { 0% { transform: translateX(-50%) translateY(0); opacity: 1; } 100% { transform: translateX(-50%) translateY(16px); opacity: 0; } }
+
+        .marquee { background: var(--color-accent); padding: 20px 0; overflow: hidden; border-top: 1px solid var(--color-accent); border-bottom: 1px solid var(--color-accent); transform: rotate(-1.5deg); margin: 60px 0; }
+        .marquee__track { display: flex; gap: 60px; animation: marquee 30s linear infinite; white-space: nowrap; width: max-content; }
+        .marquee__item { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: #000; text-transform: uppercase; letter-spacing: 0.05em; }
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        .section--beneficios { background: var(--color-bg); position: relative; }
+        .section--beneficios::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 80%; height: 1px; background: linear-gradient(90deg, transparent, var(--color-border), transparent); }
+        .beneficios__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .beneficio-card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; transition: all var(--t-base); position: relative; }
+        .beneficio-card:hover { transform: translateY(-8px); border-color: var(--color-accent); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--color-accent); }
+        .beneficio-card__image { position: relative; aspect-ratio: 16/10; overflow: hidden; }
+        .beneficio-card__image img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--t-slow); filter: brightness(0.8); }
+        .beneficio-card:hover .beneficio-card__image img { transform: scale(1.1); }
+        .beneficio-card__number { position: absolute; top: 16px; right: 16px; font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--color-text); background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); padding: 6px 12px; border-radius: var(--radius-sm); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .beneficio-card__content { padding: 32px; }
+        .beneficio-card__icon { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-orange) 100%); border-radius: var(--radius-md); margin-bottom: 20px; }
+        .beneficio-card__icon svg { width: 28px; height: 28px; color: #000; stroke-width: 2.5; }
+        .beneficio-card__title { font-family: var(--font-display); font-size: 1.375rem; font-weight: 700; line-height: 1.3; margin-bottom: 12px; color: var(--color-text); }
+        .beneficio-card__description { color: var(--color-text-muted); line-height: 1.6; margin-bottom: 24px; }
+        .beneficio-card__features { display: flex; flex-direction: column; gap: 8px; padding-top: 20px; border-top: 1px solid var(--color-border); }
+        .beneficio-card__features li { display: flex; align-items: center; gap: 10px; color: var(--color-text); font-size: 0.95rem; }
+        .check { color: var(--color-accent); font-weight: 700; font-size: 1.1rem; }
+
+        .section--processo { background: var(--color-bg-alt); position: relative; overflow: hidden; }
+        .section--processo::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top, rgba(198, 255, 0, 0.05) 0%, transparent 50%); pointer-events: none; }
+        .processo__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; position: relative; }
+        .processo__step { text-align: center; padding: 48px 32px; background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); position: relative; transition: all var(--t-base); }
+        .processo__step:hover { transform: translateY(-4px); border-color: var(--color-accent); }
+        .processo__num { font-family: var(--font-display); font-size: 4rem; font-weight: 700; background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-orange) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 16px; }
+        .processo__step h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+        .processo__step p { color: var(--color-text-muted); line-height: 1.6; }
+
+        .section--depoimentos { background: var(--color-bg); }
+        .depoimentos__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .depoimento { padding: 32px; background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); transition: all var(--t-base); }
+        .depoimento:hover { transform: translateY(-4px); border-color: var(--color-accent); }
+        .depoimento__stars { color: var(--color-accent); font-size: 1.25rem; margin-bottom: 16px; letter-spacing: 2px; }
+        .depoimento__text { color: var(--color-text); line-height: 1.7; margin-bottom: 24px; font-size: 1.05rem; }
+        .depoimento__author { display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid var(--color-border); }
+        .depoimento__author img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--color-accent); }
+        .depoimento__author strong { display: block; color: var(--color-text); font-weight: 600; }
+        .depoimento__author span { color: var(--color-text-muted); font-size: 0.875rem; }
+
+        .section--planos { background: var(--color-bg-alt); position: relative; }
+        .section--planos::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(198, 255, 0, 0.05) 0%, transparent 60%); pointer-events: none; }
+        .planos__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; max-width: 900px; margin: 0 auto; position: relative; }
+        .plano-card { position: relative; background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 40px 32px; transition: all var(--t-base); display: flex; flex-direction: column; }
+        .plano-card:hover { transform: translateY(-8px); }
+        .plano-card--featured { background: linear-gradient(180deg, rgba(198, 255, 0, 0.05) 0%, var(--color-bg-card) 100%); border: 1px solid var(--color-accent); box-shadow: 0 0 60px rgba(198, 255, 0, 0.15); }
+        .plano-card--featured:hover { box-shadow: 0 0 80px rgba(198, 255, 0, 0.3); }
+        .plano-card__header { text-align: center; margin-bottom: 32px; position: relative; }
+        .plano-card__tag { position: absolute; top: -56px; left: 50%; transform: translateX(-50%); background: var(--color-bg-elevated); color: var(--color-accent); font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; padding: 6px 16px; border-radius: var(--radius-full); border: 1px solid var(--color-border); white-space: nowrap; }
+        .plano-card__tag--featured { background: var(--color-accent); color: #000; border-color: var(--color-accent); }
+        .plano-card__icon { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: rgba(198, 255, 0, 0.1); border: 1px solid rgba(198, 255, 0, 0.2); border-radius: var(--radius-md); margin-bottom: 16px; }
+        .plano-card__icon svg { width: 32px; height: 32px; color: var(--color-accent); stroke-width: 2; }
+        .plano-card__name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+        .plano-card__type { color: var(--color-text-muted); font-size: 0.875rem; }
+        .plano-card__price { text-align: center; margin-bottom: 24px; display: flex; align-items: baseline; justify-content: center; gap: 4px; flex-wrap: wrap; }
+        .price__currency { font-family: var(--font-display); font-size: 1.5rem; color: var(--color-text-muted); font-weight: 600; }
+        .price__value { font-family: var(--font-display); font-size: 4rem; font-weight: 700; line-height: 1; background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .price__cents { font-family: var(--font-display); font-size: 1.5rem; color: var(--color-text-muted); font-weight: 600; }
+        .price__period { color: var(--color-text-muted); font-size: 0.95rem; margin-left: 8px; }
+        .plano-card__description { color: var(--color-text-muted); text-align: center; line-height: 1.6; margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--color-border); }
+        .plano-card__features { flex: 1; margin-bottom: 32px; display: flex; flex-direction: column; gap: 12px; }
+        .plano-card__features li { display: flex; align-items: flex-start; gap: 10px; color: var(--color-text); line-height: 1.5; }
+        .plano-card__features .check { flex-shrink: 0; margin-top: 2px; }
+
+        .cta-final { position: relative; padding: 120px 0; overflow: hidden; isolation: isolate; }
+        .cta-final__bg { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(198, 255, 0, 0.2) 0%, transparent 60%), var(--color-bg); z-index: -1; }
+        .cta-final__bg::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(2px 2px at 10% 20%, rgba(198, 255, 0, 0.4), transparent), radial-gradient(2px 2px at 80% 80%, rgba(255, 107, 53, 0.3), transparent), radial-gradient(1px 1px at 50% 50%, rgba(255, 255, 255, 0.3), transparent); background-size: 100% 100%; opacity: 0.5; }
+        .cta-final__content { text-align: center; max-width: 700px; margin: 0 auto; }
+        .cta-final__title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 20px; }
+        .cta-final__text { font-size: 1.25rem; color: var(--color-text-muted); margin-bottom: 40px; line-height: 1.6; }
+
+        .footer { background: var(--color-bg); border-top: 1px solid var(--color-border); padding: 60px 0 30px; }
+        .footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 40px; }
+        .footer__brand p { color: var(--color-text-muted); line-height: 1.6; margin-top: 16px; max-width: 360px; }
+        .footer__col h4 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 16px; color: var(--color-text); }
+        .footer__col ul { display: flex; flex-direction: column; gap: 10px; }
+        .footer__col a { color: var(--color-text-muted); transition: color var(--t-fast); }
+        .footer__col a:hover { color: var(--color-accent); }
+        .footer__bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 30px; border-top: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 0.875rem; flex-wrap: wrap; gap: 16px; }
+
+        .whatsapp-float {
+            position: fixed; bottom: 28px; right: 28px; width: 64px; height: 64px;
+            background: var(--color-whatsapp); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0.7);
+            z-index: 999; transition: all var(--t-base);
+            animation: whatsappEntry 1s var(--t-spring) 1.5s backwards; cursor: pointer;
+        }
+        @keyframes whatsappEntry { from { transform: scale(0) rotate(-180deg); opacity: 0; } to { transform: scale(1) rotate(0); opacity: 1; } }
+        .whatsapp-float:hover { background: var(--color-whatsapp-dark); transform: scale(1.1) translateY(-4px); box-shadow: 0 12px 32px rgba(37, 211, 102, 0.6); }
+        .whatsapp-float__icon { width: 32px; height: 32px; color: #fff; position: relative; z-index: 2; animation: whatsappIconBounce 3s ease-in-out infinite; }
+        @keyframes whatsappIconBounce { 0%, 100% { transform: scale(1); } 10% { transform: scale(1.1) rotate(-5deg); } 20% { transform: scale(1.1) rotate(5deg); } 30% { transform: scale(1); } }
+        .whatsapp-float__pulse { position: absolute; inset: 0; border-radius: 50%; background: var(--color-whatsapp); animation: whatsappPulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite; z-index: 1; }
+        .whatsapp-float__pulse--delay { animation-delay: 1s; }
+        @keyframes whatsappPulse { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.8); opacity: 0; } }
+        .whatsapp-float__tooltip { position: absolute; right: 76px; top: 50%; transform: translateY(-50%) translateX(8px); background: var(--color-text); color: var(--color-bg); padding: 8px 14px; border-radius: var(--radius-md); font-size: 0.875rem; font-weight: 600; white-space: nowrap; opacity: 0; pointer-events: none; transition: all var(--t-base); }
+        .whatsapp-float__tooltip::after { content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); border: 6px solid transparent; border-left-color: var(--color-text); }
+        .whatsapp-float:hover .whatsapp-float__tooltip { opacity: 1; transform: translateY(-50%) translateX(0); }
+
+        [data-aos] { opacity: 0; transition: opacity var(--t-slow), transform var(--t-slow); }
+        [data-aos="fade-up"] { transform: translateY(40px); }
+        [data-aos="fade-down"] { transform: translateY(-40px); }
+        [data-aos="fade-left"] { transform: translateX(40px); }
+        [data-aos="zoom-in"] { transform: scale(0.9); }
+        [data-aos].aos-animate { opacity: 1; transform: translate(0) scale(1); }
+
+        @media (max-width: 1024px) {
+            .hero__container { grid-template-columns: 1fr; gap: 60px; text-align: center; }
+            .hero__content { max-width: 100%; }
+            .hero__subtitle { margin-left: auto; margin-right: auto; }
+            .hero__cta-group { justify-content: center; }
+            .hero__stats { justify-content: center; }
+            .hero__visual { max-width: 500px; margin: 0 auto; }
+            .hero__card-1 { left: -20px; }
+            .hero__card-2 { right: -20px; }
+            .footer__grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+        }
+        @media (max-width: 768px) {
+            .section { padding: 80px 0; }
+            .section__header { margin-bottom: 60px; }
+            .nav__menu { position: fixed; top: 70px; right: -100%; width: 80%; max-width: 320px; height: calc(100vh - 70px); background: var(--color-bg); border-left: 1px solid var(--color-border); flex-direction: column; align-items: flex-start; padding: 32px 24px; gap: 24px; transition: right var(--t-base); overflow-y: auto; }
+            .nav__menu.active { right: 0; }
+            .nav__toggle { display: flex; }
+            .nav__toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            .nav__toggle.active span:nth-child(2) { opacity: 0; }
+            .nav__toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+            .hero { padding: 100px 0 60px; }
+            .hero__stats { gap: 20px; }
+            .stat__divider { display: none; }
+            .hero__floating-card { padding: 8px 14px; }
+            .card-title { font-size: 0.8rem; }
+            .card-sub { font-size: 0.7rem; }
+            .hero__scroll-indicator { display: none; }
+            .marquee__item { font-size: 1.125rem; }
+            .footer__grid { grid-template-columns: 1fr; gap: 32px; }
+            .footer__bottom { flex-direction: column; text-align: center; }
+            .whatsapp-float { width: 56px; height: 56px; bottom: 20px; right: 20px; }
+            .whatsapp-float__icon { width: 28px; height: 28px; }
+            .plano-card { padding: 32px 24px; }
+            .plano-card__tag { top: -48px; }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+            .btn { padding: 14px 24px; font-size: 0.95rem; }
+            .btn--xl { padding: 16px 28px; font-size: 1rem; }
+            .hero__cta-group { flex-direction: column; width: 100%; }
+            .hero__cta-group .btn { width: 100%; }
+            .price__value { font-size: 3rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+        }
+        ::selection { background: var(--color-accent); color: #000; }
+        ::-moz-selection { background: var(--color-accent); color: #000; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--color-bg); }
+        ::-webkit-scrollbar-thumb { background: var(--color-bg-elevated); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+    </style>
+</head>
+<body>
+
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Fit<span class="logo-accent">Pro</span></span>
+            </a>
+            <ul class="nav__menu" id="nav-menu">
+                <li><a href="#beneficios" class="nav__link">Benefícios</a></li>
+                <li><a href="#planos" class="nav__link">Planos</a></li>
+                <li><a href="#depoimentos" class="nav__link">Resultados</a></li>
+                <li><a href="https://wa.me/5511953429077?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20as%20soluções%20para%20Personal%20Trainer." class="nav__cta" target="_blank" rel="noopener">Falar com Especialista</a></li>
+            </ul>
+            <button class="nav__toggle" id="nav-toggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero__bg">
+            <div class="hero__gradient"></div>
+            <div class="hero__particles"></div>
+        </div>
+        <div class="hero__container container">
+            <div class="hero__content">
+                <div class="hero__badge" data-aos="fade-down">
+                    <span class="badge__dot"></span>
+                    Plataforma #1 em Automação Fitness
+                </div>
+                <h1 class="hero__title" data-aos="fade-up">
+                    Pare de perder <span class="text-gradient">clientes</span> e tempo.
+                    <span class="hero__title-block">Automatize os processos do seu <span class="text-accent">estúdio</span>.</span>
+                </h1>
+                <p class="hero__subtitle" data-aos="fade-up" data-aos-delay="100">
+                    A plataforma definitiva para <strong>Personal Trainers</strong>. Tenha agendamento automático, gestão completa de alunos e aumente seu faturamento sem esforço manual.
+                </p>
+                <div class="hero__cta-group" data-aos="fade-up" data-aos-delay="200">
+                    <a href="https://wa.me/5511953429077?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20as%20soluções%20para%20Personal%20Trainer." class="btn btn--primary" target="_blank" rel="noopener">
+                        <span>Quero Automatizar Meu Estúdio</span>
+                        <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#beneficios" class="btn btn--ghost">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        <span>Ver como funciona</span>
+                    </a>
+                </div>
+                <div class="hero__stats" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat"><div class="stat__number">+2.500</div><div class="stat__label">Personal Trainers</div></div>
+                    <div class="stat__divider"></div>
+                    <div class="stat"><div class="stat__number">+180k</div><div class="stat__label">Alunos Ativos</div></div>
+                    <div class="stat__divider"></div>
+                    <div class="stat"><div class="stat__number">98%</div><div class="stat__label">Satisfação</div></div>
+                </div>
+            </div>
+            <div class="hero__visual" data-aos="fade-left" data-aos-delay="400">
+                <div class="hero__image-wrapper">
+                    <div class="hero__image-glow"></div>
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=85&auto=format&fit=crop" alt="Personal Trainer profissional" class="hero__image" loading="eager">
+                    <div class="hero__floating-card hero__card-1">
+                        <div class="card-icon">📅</div>
+                        <div><div class="card-title">Agendamento</div><div class="card-sub">100% Automático</div></div>
+                    </div>
+                    <div class="hero__floating-card hero__card-2">
+                        <div class="card-icon">💰</div>
+                        <div><div class="card-title">+ R$ 12.4k</div><div class="card-sub">Faturamento mensal</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero__scroll-indicator">
+            <span>Role para descobrir</span>
+            <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+        </div>
+    </section>
+
+    <section class="marquee">
+        <div class="marquee__track">
+            <span class="marquee__item">★ Transforme seu estúdio</span>
+            <span class="marquee__item">★ Mais de 2.500 Personal Trainers</span>
+            <span class="marquee__item">★ Aumente faturamento em 3x</span>
+            <span class="marquee__item">★ Zero esforço manual</span>
+            <span class="marquee__item">★ Transforme seu estúdio</span>
+            <span class="marquee__item">★ Mais de 2.500 Personal Trainers</span>
+            <span class="marquee__item">★ Aumente faturamento em 3x</span>
+            <span class="marquee__item">★ Zero esforço manual</span>
+        </div>
+    </section>
+
+    <section class="section section--beneficios" id="beneficios">
+        <div class="container">
+            <div class="section__header" data-aos="fade-up">
+                <span class="section__eyebrow">FUNCIONALIDADES PODEROSAS</span>
+                <h2 class="section__title">Tudo que você precisa para <span class="text-gradient">escalar</span> seu negócio fitness</h2>
+                <p class="section__description">Uma plataforma completa que automatiza processos, elimina tarefas manuais e te devolve o tempo para focar no que importa: <strong>transformar vidas</strong>.</p>
+            </div>
+            <div class="beneficios__grid">
+                <article class="beneficio-card" data-aos="fade-up">
+                    <div class="beneficio-card__image">
+                        <img src="https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=600&q=85&auto=format&fit=crop" alt="Agendamento automático" loading="lazy">
+                        <div class="beneficio-card__number">01</div>
+                    </div>
+                    <div class="beneficio-card__content">
+                        <div class="beneficio-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+                        <h3 class="beneficio-card__title">Agendamento Automático via WhatsApp</h3>
+                        <p class="beneficio-card__description">Elimine as falhas de comunicação e furos de agenda. Seus alunos agendam, remarcam e confirmam treino direto pelo WhatsApp, 24/7.</p>
+                        <ul class="beneficio-card__features">
+                            <li><span class="check">✓</span> Confirmação automática</li>
+                            <li><span class="check">✓</span> Lembretes inteligentes</li>
+                            <li><span class="check">✓</span> Sincronização em tempo real</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="beneficio-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="beneficio-card__image">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=85&auto=format&fit=crop" alt="Gestão de alunos" loading="lazy">
+                        <div class="beneficio-card__number">02</div>
+                    </div>
+                    <div class="beneficio-card__content">
+                        <div class="beneficio-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                        <h3 class="beneficio-card__title">Automatização de Processos</h3>
+                        <p class="beneficio-card__description">Fichas de treino, envio de lembretes e acompanhamento da evolução dos alunos em um único painel. Tudo organizado, nada no esquecimento.</p>
+                        <ul class="beneficio-card__features">
+                            <li><span class="check">✓</span> Fichas de treino digitais</li>
+                            <li><span class="check">✓</span> Acompanhamento de evolução</li>
+                            <li><span class="check">✓</span> Relatórios automáticos</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="beneficio-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="beneficio-card__image">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=85&auto=format&fit=crop" alt="Controle financeiro" loading="lazy">
+                        <div class="beneficio-card__number">03</div>
+                    </div>
+                    <div class="beneficio-card__content">
+                        <div class="beneficio-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                        <h3 class="beneficio-card__title">Controle Financeiro e Mensalidades</h3>
+                        <p class="beneficio-card__description">Chega de cobranças manuais. Sistema completo de mensalidades, cobranças automáticas e fluxo de caixa em tempo real.</p>
+                        <ul class="beneficio-card__features">
+                            <li><span class="check">✓</span> Cobranças recorrentes</li>
+                            <li><span class="check">✓</span> Fluxo de caixa automático</li>
+                            <li><span class="check">✓</span> Integração com bancos</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="beneficio-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="beneficio-card__image">
+                        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=85&auto=format&fit=crop" alt="Página de captura" loading="lazy">
+                        <div class="beneficio-card__number">04</div>
+                    </div>
+                    <div class="beneficio-card__content">
+                        <div class="beneficio-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+                        <h3 class="beneficio-card__title">Página de Captura Própria</h3>
+                        <p class="beneficio-card__description">Você terá seu próprio link para atrair novos alunos na internet. Página otimizada para conversão com domínio personalizado.</p>
+                        <ul class="beneficio-card__features">
+                            <li><span class="check">✓</span> Domínio personalizado</li>
+                            <li><span class="check">✓</span> Otimizado para conversão</li>
+                            <li><span class="check">✓</span> SEO incluso</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--processo">
+        <div class="container">
+            <div class="section__header" data-aos="fade-up">
+                <span class="section__eyebrow">COMO FUNCIONA</span>
+                <h2 class="section__title">Em <span class="text-gradient">3 passos</span> simples você sai do caos para o controle total</h2>
+            </div>
+            <div class="processo__grid">
+                <div class="processo__step" data-aos="zoom-in">
+                    <div class="processo__num">01</div>
+                    <h3>Configure seu estúdio</h3>
+                    <p>Em menos de 10 minutos você configura sua agenda, preços, fichas de treino e métodos de pagamento.</p>
+                </div>
+                <div class="processo__step" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="processo__num">02</div>
+                    <h3>Conecte seus alunos</h3>
+                    <p>Cada aluno recebe acesso ao app e seu WhatsApp vira um assistente automático de agendamento.</p>
+                </div>
+                <div class="processo__step" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="processo__num">03</div>
+                    <h3>Veja o faturamento crescer</h3>
+                    <p>Com processos automatizados, você foca em treinar e o sistema cuida de todo o resto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--depoimentos" id="depoimentos">
+        <div class="container">
+            <div class="section__header" data-aos="fade-up">
+                <span class="section__eyebrow">RESULTADOS REAIS</span>
+                <h2 class="section__title">Quem usa, <span class="text-gradient">escala</span></h2>
+            </div>
+            <div class="depoimentos__grid">
+                <article class="depoimento" data-aos="fade-up">
+                    <div class="depoimento__stars">★★★★★</div>
+                    <p class="depoimento__text">"Triplicou meu faturamento em 4 meses. A automação do WhatsApp me devolveu 3 horas por dia. Vale cada centavo."</p>
+                    <div class="depoimento__author">
+                        <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&q=85&auto=format&fit=crop" alt="Carlos Silva" loading="lazy">
+                        <div><strong>Carlos Silva</strong><span>Personal Trainer · São Paulo</span></div>
+                    </div>
+                </article>
+                <article class="depoimento" data-aos="fade-up" data-aos-delay="100">
+                    <div class="depoimento__stars">★★★★★</div>
+                    <p class="depoimento__text">"Passei de 25 para 80 alunos sem aumentar um centavo de custo. A página de captura trouxe leads todos os dias."</p>
+                    <div class="depoimento__author">
+                        <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&q=85&auto=format&fit=crop" alt="Marina Costa" loading="lazy">
+                        <div><strong>Marina Costa</strong><span>Personal Trainer · Rio de Janeiro</span></div>
+                    </div>
+                </article>
+                <article class="depoimento" data-aos="fade-up" data-aos-delay="200">
+                    <div class="depoimento__stars">★★★★★</div>
+                    <p class="depoimento__text">"O controle financeiro acabou com minha dor de cabeça. Cobranças automáticas, inadimplência zerou."</p>
+                    <div class="depoimento__author">
+                        <img src="https://images.unsplash.com/photo-1583468982228-19f19164aee2?w=200&q=85&auto=format&fit=crop" alt="Ricardo Oliveira" loading="lazy">
+                        <div><strong>Ricardo Oliveira</strong><span>Personal Trainer · Belo Horizonte</span></div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--planos" id="planos">
+        <div class="container">
+            <div class="section__header" data-aos="fade-up">
+                <span class="section__eyebrow">PLANOS TRANSPARENTES</span>
+                <h2 class="section__title">Escolha o plano ideal para o seu <span class="text-gradient">momento</span></h2>
+                <p class="section__description">Sem letras miúdas, sem surpresas. Cancele quando quiser.</p>
+            </div>
+            <div class="planos__grid">
+                <article class="plano-card" data-aos="fade-up">
+                    <div class="plano-card__header">
+                        <div class="plano-card__tag">MAIS POPULAR</div>
+                        <div class="plano-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                        <h3 class="plano-card__name">Plano Assinatura</h3>
+                        <p class="plano-card__type">Micro SaaS Mensal</p>
+                    </div>
+                    <div class="plano-card__price">
+                        <span class="price__currency">R$</span>
+                        <span class="price__value">80</span>
+                        <span class="price__cents">,00</span>
+                        <span class="price__period">/mês</span>
+                    </div>
+                    <p class="plano-card__description">Ideal para quem quer a plataforma completa como serviço. Sem dor de cabeça, sem instalação.</p>
+                    <ul class="plano-card__features">
+                        <li><span class="check">✓</span> Agendamento via WhatsApp ilimitado</li>
+                        <li><span class="check">✓</span> Fichas de treino digitais</li>
+                        <li><span class="check">✓</span> Controle financeiro completo</li>
+                        <li><span class="check">✓</span> Página de captura personalizada</li>
+                        <li><span class="check">✓</span> Suporte prioritário</li>
+                        <li><span class="check">✓</span> Atualizações gratuitas</li>
+                        <li><span class="check">✓</span> Alunos ilimitados</li>
+                    </ul>
+                    <a href="https://wa.me/5511953429077?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20as%20soluções%20para%20Personal%20Trainer." class="btn btn--primary btn--block" target="_blank" rel="noopener">
+                        <span>Começar agora</span>
+                    </a>
+                </article>
+                <article class="plano-card plano-card--featured" data-aos="fade-up" data-aos-delay="100">
+                    <div class="plano-card__header">
+                        <div class="plano-card__tag plano-card__tag--featured">RECOMENDADO</div>
+                        <div class="plano-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+                        <h3 class="plano-card__name">Site Pronto</h3>
+                        <p class="plano-card__type">Pagamento Único</p>
+                    </div>
+                    <div class="plano-card__price">
+                        <span class="price__currency">R$</span>
+                        <span class="price__value">500</span>
+                        <span class="price__cents">,00</span>
+                        <span class="price__period">único</span>
+                    </div>
+                    <p class="plano-card__description">Desenvolvimento de um site exclusivo e profissional focado na conversão de alunos. Seu, pra sempre.</p>
+                    <ul class="plano-card__features">
+                        <li><span class="check">✓</span> Site institucional completo</li>
+                        <li><span class="check">✓</span> Design premium personalizado</li>
+                        <li><span class="check">✓</span> Otimizado para SEO e conversão</li>
+                        <li><span class="check">✓</span> Domínio próprio (1 ano incluso)</li>
+                        <li><span class="check">✓</span> Hospedagem inclusa (1 ano)</li>
+                        <li><span class="check">✓</span> Mobile responsivo</li>
+                        <li><span class="check">✓</span> Integração com WhatsApp</li>
+                        <li><span class="check">✓</span> Suporte por 90 dias</li>
+                    </ul>
+                    <a href="https://wa.me/5511953429077?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20as%20soluções%20para%20Personal%20Trainer." class="btn btn--featured btn--block" target="_blank" rel="noopener">
+                        <span>Quero meu site pronto</span>
+                        <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-final">
+        <div class="cta-final__bg"></div>
+        <div class="container">
+            <div class="cta-final__content" data-aos="zoom-in">
+                <h2 class="cta-final__title">Pronto para <span class="text-gradient">revolucionar</span> seu estúdio?</h2>
+                <p class="cta-final__text">Mais de 2.500 Personal Trainers já automatizaram seus processos. Chegou a sua vez.</p>
+                <a href="https://wa.me/5511953429077?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20as%20soluções%20para%20Personal%20Trainer." class="btn btn--primary btn--xl" target="_blank" rel="noopener">
+                    <span>Quero Automatizar Meu Estúdio</span>
+                    <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="#" class="nav__logo"><span class="logo-icon">⚡</span><span class="logo-text">Fit<span class="logo-accent">Pro</span></span></a>
+                    <p>A plataforma definitiva para Personal Trainers que querem escalar sem perder a qualidade.</p>
+                </div>
+                <div class="footer__col">
+                    <h4>Produto</h4>
+                    <ul>
+                        <li><a href="#beneficios">Benefícios</a></li>
+                        <li><a href="#planos">Planos</a></li>
+                        <li><a href="#depoimentos">Resultados</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="https://wa.me/5511953429077" target="_blank" rel="noopener">WhatsApp</a></li>
+                        <li><a href="mailto:contato@fitpro.com.br">contato@fitpro.com.br</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>© 2026 FitPro Automação. Todos os direitos reservados.</p>
+                <p>Feito com 💪 para Personal Trainers</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5511953429077?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20as%20soluções%20para%20Personal%20Trainer." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+        <span class="whatsapp-float__pulse"></span>
+        <span class="whatsapp-float__pulse whatsapp-float__pulse--delay"></span>
+        <svg class="whatsapp-float__icon" viewBox="0 0 32 32" fill="currentColor">
+            <path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.413.713 4.66 1.937 6.553L4 29l7.668-1.892A11.94 11.94 0 0 0 16.001 27C22.629 27 28 21.627 28 15S22.629 3 16.001 3zm0 21.998a9.94 9.94 0 0 1-5.066-1.388l-.363-.216-4.555 1.124 1.146-4.435-.237-.378A9.953 9.953 0 0 1 6.002 15c0-5.515 4.485-10 9.999-10 5.514 0 9.999 4.485 9.999 10s-4.485 9.998-9.999 9.998zm5.49-7.498c-.3-.15-1.776-.876-2.05-.976-.275-.1-.475-.15-.675.15-.2.3-.775.976-.95 1.176-.175.2-.35.225-.65.075-.3-.15-1.267-.467-2.413-1.488-.892-.795-1.494-1.778-1.669-2.078-.175-.3-.019-.462.131-.612.135-.135.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.675-1.625-.925-2.225-.243-.583-.49-.504-.675-.513l-.575-.01c-.2 0-.525.075-.8.375s-1.05 1.025-1.05 2.5 1.075 2.9 1.225 3.1c.15.2 2.117 3.234 5.13 4.535.717.31 1.276.495 1.713.633.72.229 1.375.196 1.894.119.578-.086 1.776-.726 2.025-1.428.25-.7.25-1.302.175-1.428-.075-.125-.275-.2-.575-.35z"/>
+        </svg>
+        <span class="whatsapp-float__tooltip">Fale conosco!</span>
+    </a>
+
+    <script>
+    (function() {
+        'use strict';
+
+        class ScrollAnimations {
+            constructor() {
+                this.elements = document.querySelectorAll('[data-aos]');
+                this.init();
+            }
+            init() {
+                if (!('IntersectionObserver' in window)) {
+                    this.elements.forEach(el => el.classList.add('aos-animate'));
+                    return;
+                }
+                this.observer = new IntersectionObserver((entries) => this.handleIntersection(entries), { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+                this.elements.forEach(el => this.observer.observe(el));
+            }
+            handleIntersection(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = entry.target.dataset.aosDelay || 0;
+                        setTimeout(() => entry.target.classList.add('aos-animate'), parseInt(delay));
+                        this.observer.unobserve(entry.target);
+                    }
+                });
+            }
+        }
+
+        class HeaderScroll {
+            constructor() { this.header = document.getElementById('header'); this.init(); }
+            init() {
+                if (!this.header) return;
+                window.addEventListener('scroll', () => {
+                    if (window.pageYOffset > 50) this.header.classList.add('scrolled');
+                    else this.header.classList.remove('scrolled');
+                }, { passive: true });
+            }
+        }
+
+        class MobileNav {
+            constructor() {
+                this.toggle = document.getElementById('nav-toggle');
+                this.menu = document.getElementById('nav-menu');
+                this.links = this.menu ? this.menu.querySelectorAll('.nav__link, .nav__cta') : [];
+                this.init();
+            }
+            init() {
+                if (!this.toggle || !this.menu) return;
+                this.toggle.addEventListener('click', () => this.toggleMenu());
+                this.links.forEach(link => link.addEventListener('click', () => this.closeMenu()));
+                document.addEventListener('click', (e) => {
+                    if (!this.menu.contains(e.target) && !this.toggle.contains(e.target)) this.closeMenu();
+                });
+            }
+            toggleMenu() { this.toggle.classList.toggle('active'); this.menu.classList.toggle('active'); }
+            closeMenu() { this.toggle.classList.remove('active'); this.menu.classList.remove('active'); }
+        }
+
+        class SmoothScroll {
+            constructor() { this.links = document.querySelectorAll('a[href^="#"]'); this.init(); }
+            init() {
+                this.links.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        const href = link.getAttribute('href');
+                        if (href === '#' || href.length < 2) return;
+                        const target = document.querySelector(href);
+                        if (!target) return;
+                        e.preventDefault();
+                        const headerOffset = 80;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+                        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                    });
+                });
+            }
+        }
+
+        class CounterAnimation {
+            constructor() { this.counters = document.querySelectorAll('.stat__number'); this.init(); }
+            init() {
+                if (this.counters.length === 0 || !('IntersectionObserver' in window)) return;
+                this.observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) { this.animateCounter(entry.target); this.observer.unobserve(entry.target); }
+                    });
+                }, { threshold: 0.5 });
+                this.counters.forEach(counter => this.observer.observe(counter));
+            }
+            animateCounter(element) {
+                const text = element.textContent;
+                const match = text.match(/(\+?)(\d+)([a-z%]*)/i);
+                if (!match) return;
+                const prefix = match[1] || '';
+                const target = parseInt(match[2]);
+                const suffix = match[3] || '';
+                const duration = 2000;
+                const start = performance.now();
+                const step = (now) => {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.floor(target * easeOut);
+                    element.textContent = `${prefix}${current.toLocaleString('pt-BR')}${suffix}`;
+                    if (progress < 1) requestAnimationFrame(step);
+                    else element.textContent = text;
+                };
+                requestAnimationFrame(step);
+            }
+        }
+
+        class TiltEffect {
+            constructor() {
+                this.cards = document.querySelectorAll('.plano-card, .beneficio-card');
+                this.init();
+            }
+            init() {
+                if (this.cards.length === 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.innerWidth < 768) return;
+                this.cards.forEach(card => {
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        card.style.transform = `translateY(-8px) perspective(1000px) rotateX(${-y / 25}deg) rotateY(${x / 25}deg)`;
+                    });
+                    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new ScrollAnimations();
+            new HeaderScroll();
+            new MobileNav();
+            new SmoothScroll();
+            new CounterAnimation();
+            new TiltEffect();
+        });
+    })();
+    </script>
+</body>
+</html>
